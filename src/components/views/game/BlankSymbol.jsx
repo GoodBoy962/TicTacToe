@@ -15,14 +15,7 @@ export const Symbol = styled.div`
 `;
 
 const BlankSymbol = ({move, row, column, turn, selfTurn, gameOver}) => {
-
-    const onMove = e => {
-        e.preventDefault();
-        let curSymbol = X;
-        if (turn === 2) curSymbol = O;
-        !gameOver && selfTurn === turn && move(row, column, curSymbol);
-    };
-
+    const onMove = () => !gameOver && selfTurn === turn && move(row, column, turn === 1 ? X : O);
     return <Symbol onClick={onMove}/>;
 };
 

@@ -69,6 +69,8 @@ export const connectToRoom = name =>
 
         const room = getRoom(name);
 
+        console.log(room.getPeers());
+
         dispatch({
             type: CONNECT_TO_ROOM,
             room,

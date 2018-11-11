@@ -1,9 +1,7 @@
 import * as IPFS from 'ipfs';
 import * as Room from 'ipfs-pubsub-room'
 
-function repo () {
-    return 'ipfs/pubsub-demo/' + Math.random()
-}
+const repo = () => 'ipfs/tictactoe/' + Math.random();
 
 export const ipfs = new IPFS({
     repo: repo(),
@@ -19,4 +17,4 @@ export const ipfs = new IPFS({
     }
 });
 
-export const getRoom = (name) => Room(ipfs, 'ipfs-pubsub-demo'+name);
+export const getRoom = name => Room(ipfs, 'ipfs-pubsub-demo' + name);
