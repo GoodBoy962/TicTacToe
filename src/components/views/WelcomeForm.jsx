@@ -1,6 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export default class Main extends React.Component {
+import {connectToRoom, createNewRoom} from '../../actions/room';
+
+class Main extends React.Component {
 
     state = {
         newRoomName: '',
@@ -61,3 +64,10 @@ export default class Main extends React.Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    createNewRoom: name => dispatch(createNewRoom(name)),
+    connectToRoom: name => dispatch(connectToRoom(name)),
+});
+
+export default connect(null, mapDispatchToProps)(Main);

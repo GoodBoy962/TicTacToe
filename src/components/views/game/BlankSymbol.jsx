@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
+
 import {X, O} from '../../../lib/symbols';
 import {move} from '../../../actions/room';
-import {connect} from 'react-redux';
 
 export const Symbol = styled.div`
   background-color: white;
