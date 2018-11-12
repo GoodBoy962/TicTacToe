@@ -2,15 +2,11 @@ import {X, O} from './symbols';
 
 const countInRow = (symbol, row) => row.filter(el => el === symbol).length;
 const hasWonInRow = (symbol, board) =>
-    countInRow(symbol, board[0]) === 3 ||
-    countInRow(symbol, board[1]) === 3 ||
-    countInRow(symbol, board[2]) === 3;
+    [0, 1, 2].map(column => countInRow(symbol, board[column])).filter(el => el === 3).length !== 0;
 
 const countInColumn = (symbol, board, column) => board.map(row => row[column]).filter(el => el === symbol).length;
 const hasWonInColumn = (symbol, board) =>
-    countInColumn(symbol, board, 0) === 3 ||
-    countInColumn(symbol, board, 1) === 3 ||
-    countInColumn(symbol, board, 2) === 3;
+    [0, 1, 2].map(column => countInColumn(symbol, board, column)).filter(el => el === 3).length !== 0;
 
 const hasWonInLeftSlant = (symbol, board) =>
     [board[0][0], board[1][1], board[2][2]].filter(el => el === symbol).length === 3;
@@ -24,7 +20,6 @@ const hasWon = (symbol, board) =>
 const isNowFreeFields = board => board.map(row => row.filter(el => el !== '').length).reduce((a, b) => a + b, 0) === 9;
 
 export const getWinner = board => {
-    console.log(isNowFreeFields(board));
     if (hasWon(X, board)) {
         return '1';
     } else if (hasWon(O, board)) {
@@ -32,5 +27,5 @@ export const getWinner = board => {
     } else if (isNowFreeFields(board)) {
         return 'friendship';
     }
-        return null;
+    return null;
 };

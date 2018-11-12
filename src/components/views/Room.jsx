@@ -8,6 +8,8 @@ const Room = ({roomName, turn, board, gameOver, winner}) => (
         <div className='col-6'>
             <p>room {roomName}</p>
             <Board board={board}/>
+        </div>
+        <div className='col-6'>
             {(!gameOver) ?
                 <p>Current player {turn}</p>
                 :

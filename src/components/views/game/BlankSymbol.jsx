@@ -6,12 +6,18 @@ import {X, O} from '../../../lib/symbols';
 import {move} from '../../../actions/room';
 
 export const Symbol = styled.div`
-  background-color: white;
-  border: 1px solid black;
-  height: 60px;
-  margin: 1px;
-  transition: background-color .5s ease;
-  width: 60px;
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
 `;
 
 const BlankSymbol = ({move, row, column, turn, selfTurn, gameOver}) => {
