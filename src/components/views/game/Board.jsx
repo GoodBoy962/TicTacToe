@@ -9,13 +9,19 @@ const getSymbol = (row, column, symbol) => {
     return <BlankSymbol key={column} row={row} column={column}/>;
 };
 
+class Square extends React.PureComponent {
+    render() {
+        const {row, column, symbol} = this.props;
+        return getSymbol(row, column, symbol);
+    }
+}
+
 const Board = ({board}) => (
     <div className='container-fluid tic-container'>
         {board.map((row, i) =>
             (<div className='row tic-row' key={i}>
-                {row.map((symbol, j) => getSymbol(i, j, symbol))}
-            </div>)
-        )}
+                {row.map((symbol, j) => <Square row={i} column={j} symbol={symbol}/>)}
+            </div>))}
     </div>
 );
 

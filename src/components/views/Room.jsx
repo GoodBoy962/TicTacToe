@@ -3,13 +3,14 @@ import {connect} from 'react-redux';
 
 import Board from './game/Board';
 
-const Room = ({roomName, turn, board, gameOver, winner}) => (
+const Room = ({roomName, board, turn, selfTurn, gameOver, winner}) => (
     <div className='row ready'>
         <div className='col-6'>
             <p>room {roomName}</p>
             <Board board={board}/>
         </div>
         <div className='col-6'>
+            <p>You are {selfTurn}</p>
             {(!gameOver) ?
                 <p>Current player {turn}</p>
                 :
@@ -28,7 +29,6 @@ const mapStateToProps = state => ({
     turn: state.room.turn,
     gameOver: state.room.gameOver,
     winner: state.room.winner,
-    competitor: state.room.competitor
 });
 
 export default connect(mapStateToProps)(Room);
