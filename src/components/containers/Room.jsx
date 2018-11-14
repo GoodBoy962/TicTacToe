@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Game from './Game';
+import Game from './Game/index';
 
 class Room extends React.Component {
     render() {

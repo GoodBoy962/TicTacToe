@@ -8,7 +8,7 @@ import {Router, Route} from 'react-router';
 import {Provider} from 'react-redux';
 import {Store, History} from '../store/index';
 
-import Main from './Main';
+import Main from './containers/Main';
 
 History.push('/');
 

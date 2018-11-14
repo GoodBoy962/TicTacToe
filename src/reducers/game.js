@@ -7,7 +7,7 @@ import {
     CONNECT_TO_ROOM,
     COMPETITOR_LEFT
 } from '../constants/action';
-import {X, O} from '../lib/symbols';
+import {X, O} from '../constants/symbols';
 
 const emptyHistory = () => [{
     squares: Array(9).fill(null)

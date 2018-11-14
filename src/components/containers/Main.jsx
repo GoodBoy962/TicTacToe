@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import WelcomeForm from './WelcomeForm';
 import Room from './Room';
 
-import '../assets/styles.css';
+import '../../assets/styles.css';
 
 class Main extends React.Component {
 
@@ -18,7 +18,7 @@ class Main extends React.Component {
                         <WelcomeForm/>
                         :
                         (!competitor) ?
-                            <p>waiting...</p>
+                            <p>Waiting for the opponent</p>
                             :
                             <Room/>
                 }

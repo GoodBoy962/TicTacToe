@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Board from '../views/Board';
-import {O, X} from '../../lib/symbols';
-import {move} from '../../actions/room';
+import Board from '../../views/Board';
+import {O, X} from '../../../constants/symbols';
+import {move} from '../../../actions/room';
 
 import './styles.css';
 
