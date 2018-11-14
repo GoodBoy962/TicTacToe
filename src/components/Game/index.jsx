@@ -7,7 +7,7 @@ import {move} from '../../actions/room';
 
 import './styles.css';
 
-class Index extends React.Component {
+class Game extends React.Component {
 
     handleClick(i) {
         const {xIsNext, selfTurn, gameOver} = this.props;
@@ -49,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
     move: i => dispatch(move(i))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
