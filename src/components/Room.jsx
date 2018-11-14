@@ -7,8 +7,10 @@ class Room extends React.Component {
     render() {
         return (
             <div className='row ready'>
-                <p>room {this.props.roomName}</p>
-                <Game/>
+                <div className='col-6'>
+                    <p>room {this.props.roomName}</p>
+                    <Game/>
+                </div>
             </div>
         )
     }
