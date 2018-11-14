@@ -47,8 +47,13 @@ const Actions = {
         (state, {squares}) => {
             const history = state.history.concat([{squares: squares}]);
             const winner = calculateWinner(squares);
-            if (winner) return Assing(state, {history, xIsNext: !state.xIsNext, stepNumber: state.stepNumber + 1, winner, gameOver: true});
-            return Assing(state, {history, xIsNext: !state.xIsNext, stepNumber: state.stepNumber + 1});
+            return Assing(state, {
+                history,
+                xIsNext: !state.xIsNext,
+                stepNumber: state.stepNumber + 1,
+                winner,
+                gameOver: !!winner
+            });
         }
 
 };
