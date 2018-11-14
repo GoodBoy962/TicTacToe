@@ -6,11 +6,11 @@ import {
     PLAYER_MOVE
 } from '../constants/action';
 import {getRoom} from '../lib/ipfs';
+import {O, X} from "../lib/symbols";
 
 export const createNewRoom = name =>
 
     (dispatch, getState) => {
-
         const room = getRoom(name);
 
         room.on('peer joined', peer => dispatch({
@@ -23,18 +23,20 @@ export const createNewRoom = name =>
         }));
 
         room.on('message', (message) => {
-            const {row, column, symbol} = JSON.parse(message.data.toString());
+            const {i} = JSON.parse(message.data.toString());
 
-            let {board, turn} = getState().room;
+            let {history, stepNumber, xIsNext} = getState().room;
 
-            board[row][column] = symbol;
-            turn === 1 ? turn = 2 : turn = 1;
+            history = history.slice(0, stepNumber + 1);
+            const current = history[history.length - 1];
+            const squares = current.squares.slice();
+
+            squares[i] = xIsNext ? X : O;
 
             dispatch({
                 type: PLAYER_MOVE,
-                board,
-                turn,
-            })
+                squares
+            });
         });
 
         dispatch({
@@ -45,20 +47,23 @@ export const createNewRoom = name =>
 
     };
 
-export const move = (row, column, symbol) =>
+export const move = (i) =>
 
     (dispatch, getState) => {
 
-        let {board, turn, room, competitor} = getState().room;
-        board[row][column] = symbol;
-        turn === 1 ? turn = 2 : turn = 1;
+        let {history, stepNumber, xIsNext, room, competitor} = getState().room;
 
-        room.sendTo(competitor, JSON.stringify({row, column, symbol}));
+        history = history.slice(0, stepNumber + 1);
+        const current = history[history.length - 1];
+        const squares = current.squares.slice();
+
+        squares[i] = xIsNext ? X : O;
+
+        room.sendTo(competitor, JSON.stringify({i}));
 
         dispatch({
             type: PLAYER_MOVE,
-            board,
-            turn,
+            squares
         })
 
     };
@@ -87,18 +92,20 @@ export const connectToRoom = name =>
         }));
 
         room.on('message', (message) => {
-            const {row, column, symbol} = JSON.parse(message.data.toString());
+            const {i} = JSON.parse(message.data.toString());
 
-            let {board, turn} = getState().room;
+            let {history, stepNumber, xIsNext} = getState().room;
 
-            board[row][column] = symbol;
-            turn === 1 ? turn = 2 : turn = 1;
+            history = history.slice(0, stepNumber + 1);
+            const current = history[history.length - 1];
+            const squares = current.squares.slice();
+
+            squares[i] = xIsNext ? X : O;
 
             dispatch({
                 type: PLAYER_MOVE,
-                board,
-                turn,
-            })
+                squares
+            });
         });
 
     };

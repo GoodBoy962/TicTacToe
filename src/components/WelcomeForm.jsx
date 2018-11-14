@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {connectToRoom, createNewRoom} from '../../actions/room';
+import {connectToRoom, createNewRoom} from '../actions/room';
 
 class Main extends React.Component {
 

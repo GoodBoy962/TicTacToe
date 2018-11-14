@@ -1,31 +1,23 @@
-import {X, O} from './symbols';
+const isNowFreeFields = squares => squares.filter(el => !!el).length === 9;
 
-const countInRow = (symbol, row) => row.filter(el => el === symbol).length;
-const hasWonInRow = (symbol, board) =>
-    [0, 1, 2].map(column => countInRow(symbol, board[column])).filter(el => el === 3).length !== 0;
-
-const countInColumn = (symbol, board, column) => board.map(row => row[column]).filter(el => el === symbol).length;
-const hasWonInColumn = (symbol, board) =>
-    [0, 1, 2].map(column => countInColumn(symbol, board, column)).filter(el => el === 3).length !== 0;
-
-const hasWonInLeftSlant = (symbol, board) =>
-    [board[0][0], board[1][1], board[2][2]].filter(el => el === symbol).length === 3;
-const hasWonInRightSlant = (symbol, board) =>
-    [board[0][2], board[1][1], board[2][0]].filter(el => el === symbol).length === 3;
-
-const hasWon = (symbol, board) =>
-    hasWonInRow(symbol, board) || hasWonInColumn(symbol, board) ||
-    hasWonInLeftSlant(symbol, board) || hasWonInRightSlant(symbol, board);
-
-const isNowFreeFields = board => board.map(row => row.filter(el => el !== '').length).reduce((a, b) => a + b, 0) === 9;
-
-export const getWinner = board => {
-    if (hasWon(X, board)) {
-        return '1';
-    } else if (hasWon(O, board)) {
-        return '2';
-    } else if (isNowFreeFields(board)) {
-        return 'friendship';
+export const calculateWinner = squares => {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a];
+        }
     }
+    console.log(squares);
+    if (isNowFreeFields(squares)) return 'friendship';
     return null;
 };
