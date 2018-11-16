@@ -8,15 +8,18 @@ class Main extends React.Component {
 
     state = {
         name: '',
-        isNew: false
+        isNew: false,
+        sideSize: null
     };
 
     onClick = e => {
         e.preventDefault();
-        const {name, isNew} = this.state;
+        let {name, isNew, sideSize} = this.state;
+        if (isNew && !sideSize) sideSize = 3;
         let type = CONNECT_TO_ROOM;
         if (isNew) type = CREATE_NEW_ROOM;
-        this.props.connectToRoom(name, type);
+        console.log(sideSize);
+        this.props.connectToRoom(name, type, sideSize);
     };
 
     onChange = e => {
@@ -50,6 +53,16 @@ class Main extends React.Component {
                         <label className='form-check-label'>New room</label>
                     </div>
 
+                    {
+                        this.state.isNew ?
+                            <div className='form-group'>
+                                <label>board side size</label>
+                                <input type='number' name='sideSize' className='form-control' defaultValue={3}
+                                       placeholder={3} onChange={this.onChange}/>
+                            </div>
+                            : undefined
+                    }
+
                     <div className='form-group'>
                         <button type='submit' className='btn btn-primary' onClick={this.onClick}>connect</button>
                     </div>
@@ -60,7 +73,7 @@ class Main extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    connectToRoom: (name, type) => dispatch(connectToRoom(name, type)),
+    connectToRoom: (name, type, sideSize) => dispatch(connectToRoom(name, type, sideSize)),
 });
 
 export default connect(null, mapDispatchToProps)(Main);

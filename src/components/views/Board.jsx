@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {range} from '../../lib/util';
+
 class Square extends React.PureComponent {
     render() {
         return (
@@ -21,11 +23,15 @@ export default class Board extends React.Component {
     );
 
     render() {
+        const sideSize = Math.sqrt(this.props.squares.length);
+        const rows = range(0, sideSize ** 2).filter(i => i % sideSize === 0).map(i => range(i, sideSize));
+
         return (
             <div>
-                <div className='board-row'>{[0, 1, 2].map(i => this.renderSquare(i))}</div>
-                <div className='board-row'>{[3, 4, 5].map(i => this.renderSquare(i))}</div>
-                <div className='board-row'>{[6, 7, 8].map(i => this.renderSquare(i))}</div>
+                {
+                    rows.map((row, i) => (
+                        <div key={i} className='board-row'>{row.map(i => this.renderSquare(i))}</div>))
+                }
             </div>
         );
     }

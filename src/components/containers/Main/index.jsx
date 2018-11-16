@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import WelcomeForm from './WelcomeForm';
-import Room from './Room';
+import WelcomeForm from '../WelcomeForm';
+import Room from '../Room';
 
-import '../../assets/styles.css';
+import './styles.css';
 
 class Main extends React.Component {
 

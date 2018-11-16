@@ -9,8 +9,8 @@ import {
 } from '../constants/action';
 import {X, O} from '../constants/symbols';
 
-const emptyHistory = () => [{
-    squares: Array(9).fill(null)
+const emptyHistory = count => [{
+    squares: Array(count).fill(null)
 }];
 
 const DState = {
@@ -20,7 +20,7 @@ const DState = {
     gameOver: false,
     winner: null,
     selfTurn: null,
-    history: emptyHistory(),
+    history: null,
     xIsNext: true,
     stepNumber: 0
 };
@@ -28,12 +28,12 @@ const DState = {
 const Actions = {
 
     [CREATE_NEW_ROOM]:
-        (state, {name, room}) =>
-            Assing(state, {name, room, selfTurn: X}),
+        (state, {name, room, sideSize}) =>
+            Assing(state, {name, room, selfTurn: X, history: emptyHistory(sideSize * sideSize)}),
 
     [CONNECT_TO_ROOM]:
-        (state, {name, room}) =>
-            Assing(state, {name, room, selfTurn: O}),
+        (state, {name, room, sideSize}) =>
+            Assing(state, {name, room, selfTurn: O, history: emptyHistory(sideSize * sideSize)}),
 
     [COMPETITOR_CONNECTED]:
         (state, {competitor}) =>
