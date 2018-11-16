@@ -24,7 +24,6 @@ export const connectToRoom = (name, type, sideSize) =>
             const {i, sideSize} = JSON.parse(message.data.toString());
 
             if (i+1) {
-                console.log(i);
                 let {history, stepNumber, xIsNext} = getState().room;
 
                 history = history.slice(0, stepNumber + 1);
