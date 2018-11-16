@@ -14,8 +14,7 @@ export const calculateWinner = squares => {
     ];
     const lines = rows.concat(columns).concat(diagonals);
     for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].map((el,j) => squares[el]);
-        console.log(line);
+        const line = lines[i].map(el => squares[el]);
         if (isSameNotNullSymbolOnLine(line)) return line[0];
     }
     if (isNowFreeFields(squares)) return 'friendship';

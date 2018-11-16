@@ -14,13 +14,16 @@ class Square extends React.PureComponent {
 
 export default class Board extends React.Component {
 
-    renderSquare = i => (
-        <Square
-            key={i}
-            value={this.props.squares[i]}
-            onClick={() => this.props.onClick(i)}
-        />
-    );
+    renderSquare = i => {
+        const {squares, onClick} = this.props;
+        return (
+            <Square
+                key={i}
+                value={squares[i]}
+                onClick={() => !squares[i] && onClick(i)}
+            />
+        );
+    };
 
     render() {
         const sideSize = Math.sqrt(this.props.squares.length);
