@@ -15,7 +15,7 @@ class Game extends React.Component {
     }
 
     render() {
-        const {history, stepNumber, winner, xIsNext, selfTurn} = this.props;
+        const {history, stepNumber, winner, xIsNext, selfTurn, gameOver} = this.props;
         const current = history[stepNumber];
 
         let status = 'Next player: ' + (xIsNext ? X : O);
@@ -30,6 +30,7 @@ class Game extends React.Component {
                 <div className='game-info'>
                     <div>{status}</div>
                     <div>You: {selfTurn}</div>
+                    {(gameOver && !winner) ? <div>Competitor left</div> : undefined}
                 </div>
             </div>
         );
