@@ -18,7 +18,6 @@ class Main extends React.Component {
         if (isNew && !sideSize) sideSize = 3;
         let type = CONNECT_TO_ROOM;
         if (isNew) type = CREATE_NEW_ROOM;
-        console.log(sideSize);
         this.props.connectToRoom(name, type, sideSize);
     };
 

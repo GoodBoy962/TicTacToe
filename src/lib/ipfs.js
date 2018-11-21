@@ -24,4 +24,4 @@ export const ipfs = new IPFS({
     }
 });
 
-export const getRoom = name => Room(ipfs, 'ipfs-pubsub-demo' + name);
+export const getRoom = name => Room(ipfs, name);

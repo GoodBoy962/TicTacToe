@@ -1,22 +1,34 @@
-import {range} from './util';
+export default class WinnerEngine {
 
-const isNowFreeFields = squares => squares.filter(el => !!el).length === squares.left;
-
-const isSameNotNullSymbolOnLine = line => line.filter(el => el !== null && el === line[0]).length === line.length;
-
-export const calculateWinner = squares => {
-    const size = Math.sqrt(squares.length);
-    const rows = range(0, size ** 2).filter(i => i % size === 0).map(i => range(i, size));
-    const columns = range(0, size).map(el => range(el, size).map((_, i) => el + i * size));
-    const diagonals = [
-        range(0, size).map(el => size * el + el),
-        range(1, size).map(el => size * el - el)
-    ];
-    const lines = rows.concat(columns).concat(diagonals);
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].map(el => squares[el]);
-        if (isSameNotNullSymbolOnLine(line)) return line[0];
+    constructor(sideSize) {
+        this.sideSize = sideSize;
+        this.X = {
+            row: Array(sideSize).fill(0),
+            column: Array(sideSize).fill(0),
+            diag: 0,
+            antiDiag: 0
+        };
+        this.O = {
+            row: Array(sideSize).fill(0),
+            column: Array(sideSize).fill(0),
+            diag: 0,
+            antiDiag: 0
+        };
     }
-    if (isNowFreeFields(squares)) return 'friendship';
-    return null;
-};
+
+    moveAndCheck(i, symbol) {
+        const sideSize = this.sideSize;
+        const board = this[symbol];
+        const r = ~~(i / sideSize);
+        const c = i % sideSize;
+        board.row[r]++;
+        board.column[c]++;
+        if (r === c) board.diag++;
+        if (r + c === sideSize) board.antiDiag++;
+        if (board.row[r] === sideSize ||
+            board.column[c] === sideSize ||
+            board.diag === sideSize ||
+            board.antiDiag === sideSize) return symbol;
+    }
+
+}
