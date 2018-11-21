@@ -1,4 +1,4 @@
-import {COMPETITOR_CONNECTED, COMPETITOR_LEFT, PLAYER_MOVE} from '../constants/action';
+import {COMPETITOR_CONNECTED, COMPETITOR_LEFT, LEAVE_ROOM, PLAYER_MOVE} from '../constants/action';
 import {getRoom} from '../lib/ipfs';
 
 export const connectToRoom = (name, type, sideSize) =>
@@ -30,4 +30,11 @@ export const move = i =>
         const {room, competitor} = getState().room;
         room.sendTo(competitor, JSON.stringify({i}));
         dispatch({type: PLAYER_MOVE, i})
+    };
+
+export const leaveRoom = () =>
+    async (dispatch, getState) => {
+        const {room} = getState().room;
+        await room.leave();
+        dispatch({type: LEAVE_ROOM});
     };

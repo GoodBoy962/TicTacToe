@@ -3,6 +3,7 @@ import WinnerEngine from '../lib/engine';
 import {
     CREATE_NEW_ROOM,
     PLAYER_MOVE,
+    LEAVE_ROOM,
     COMPETITOR_CONNECTED,
     CONNECT_TO_ROOM,
     COMPETITOR_LEFT
@@ -16,6 +17,7 @@ const emptyHistory = sideSize => [{
 const DState = {
     name: null,
     competitor: null,
+    competitorLeft: false,
     room: null,
     gameOver: false,
     winner: null,
@@ -45,12 +47,13 @@ const Actions = {
             }),
 
     [COMPETITOR_CONNECTED]:
-        (state, {competitor}) =>
-            Assing(state, {competitor}),
+        (state, {competitor}) => Assing(state, {competitor}),
 
     [COMPETITOR_LEFT]:
-        state =>
-            Assing(state, {gameOver: true}),
+        state => Assing(state, {gameOver: true, competitorLeft: true}),
+
+    [LEAVE_ROOM]:
+        state => Assing(state, DState),
 
     [PLAYER_MOVE]:
         (state, {i}) => {

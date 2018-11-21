@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import Board from '../../views/Board';
 import {O, X} from '../../../constants/symbols';
-import {move} from '../../../actions/room';
+import {leaveRoom, move} from '../../../actions/room';
 
 import './styles.css';
 
@@ -15,7 +15,7 @@ class Game extends React.Component {
     }
 
     render() {
-        const {history, stepNumber, winner, xIsNext, selfTurn, gameOver} = this.props;
+        const {history, stepNumber, winner, xIsNext, selfTurn, competitorLeft, leaveRoom} = this.props;
         const current = history[stepNumber];
 
         let status = 'Next player: ' + (xIsNext ? X : O);
@@ -30,7 +30,12 @@ class Game extends React.Component {
                 <div className='game-info'>
                     <div>{status}</div>
                     <div>You: {selfTurn}</div>
-                    {(gameOver && !winner) ? <div>Competitor left</div> : undefined}
+                    {competitorLeft ? <div>Competitor left</div> : undefined}
+                    <button onClick={e => {
+                        e.preventDefault();
+                        leaveRoom();
+                    }}>leave room
+                    </button>
                 </div>
             </div>
         );
@@ -43,11 +48,13 @@ const mapStateToProps = state => ({
     stepNumber: state.room.stepNumber,
     winner: state.room.winner,
     gameOver: state.room.gameOver,
-    selfTurn: state.room.selfTurn
+    selfTurn: state.room.selfTurn,
+    competitorLeft: state.room.competitorLeft
 });
 
 const mapDispatchToProps = dispatch => ({
-    move: i => dispatch(move(i))
+    move: i => dispatch(move(i)),
+    leaveRoom: () => dispatch(leaveRoom())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
