@@ -14,7 +14,7 @@ export const connectToRoom = (name, type, sideSize) =>
             } else dispatch({type: COMPETITOR_CONNECTED, competitor});
         });
 
-        room.on('peer left', () => dispatch({type: COMPETITOR_LEFT,}));
+        room.on('peer left', () => dispatch({type: COMPETITOR_LEFT}));
 
         room.on('message', message => {
             const {i, sideSize} = JSON.parse(message.data.toString());

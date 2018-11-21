@@ -9,16 +9,22 @@ class Main extends React.Component {
     state = {
         name: '',
         isNew: false,
-        sideSize: null
+        sideSize: null,
+        clicked: false
     };
 
     onClick = e => {
         e.preventDefault();
-        let {name, isNew, sideSize} = this.state;
-        if (isNew && !sideSize) sideSize = 3;
-        let type = CONNECT_TO_ROOM;
-        if (isNew) type = CREATE_NEW_ROOM;
-        this.props.connectToRoom(name, type, sideSize);
+        let {name, isNew, sideSize, clicked} = this.state;
+        if (!clicked) {
+            this.setState({
+                clicked: true
+            });
+            if (isNew && !sideSize) sideSize = 3;
+            let type = CONNECT_TO_ROOM;
+            if (isNew) type = CREATE_NEW_ROOM;
+            this.props.connectToRoom(name, type, sideSize);
+        }
     };
 
     onChange = e => {

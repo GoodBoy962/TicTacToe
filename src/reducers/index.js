@@ -1,5 +1,5 @@
 import {routerReducer} from 'react-router-redux';
-import roomReducer from './game';
+import roomReducer from './room';
 
 export default {
     routing: routerReducer,
