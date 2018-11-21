@@ -3,6 +3,7 @@ import {getRoom} from '../lib/ipfs';
 
 export const connectToRoom = (name, type, sideSize) =>
     dispatch => {
+        sideSize = Number(sideSize);
         const room = getRoom(name);
 
         room.on('peer joined', peer => {

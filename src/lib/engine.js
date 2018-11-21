@@ -1,16 +1,18 @@
+import {O, X} from '../constants/symbols';
+
 export default class WinnerEngine {
 
     constructor(sideSize) {
         this.sideSize = sideSize;
-        this.X = {
-            row: Array(sideSize).fill(0),
-            column: Array(sideSize).fill(0),
+        this[X] = {
+            row: new Array(sideSize).fill(0),
+            column: new Array(sideSize).fill(0),
             diag: 0,
             antiDiag: 0
         };
-        this.O = {
-            row: Array(sideSize).fill(0),
-            column: Array(sideSize).fill(0),
+        this[O] = {
+            row: new Array(sideSize).fill(0),
+            column: new Array(sideSize).fill(0),
             diag: 0,
             antiDiag: 0
         };
