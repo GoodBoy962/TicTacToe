@@ -20,17 +20,17 @@ export default class WinnerEngine {
 
     moveAndCheck(i, symbol) {
         const sideSize = this.sideSize;
-        const board = this[symbol];
+        const lines = this[symbol];
         const r = ~~(i / sideSize);
         const c = i % sideSize;
-        board.row[r]++;
-        board.column[c]++;
-        if (r === c) board.diag++;
-        if (r + c === sideSize) board.antiDiag++;
-        if (board.row[r] === sideSize ||
-            board.column[c] === sideSize ||
-            board.diag === sideSize ||
-            board.antiDiag === sideSize) return symbol;
+        lines.row[r]++;
+        lines.column[c]++;
+        if (r === c) lines.diag++;
+        if (r + c === sideSize - 1) lines.antiDiag++;
+        if (lines.row[r] === sideSize ||
+            lines.column[c] === sideSize ||
+            lines.diag === sideSize ||
+            lines.antiDiag === sideSize) return symbol;
     }
 
 }
