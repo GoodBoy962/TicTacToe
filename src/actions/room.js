@@ -8,8 +8,10 @@ export const connectToRoom = (name, type, sideSize) =>
 
         room.on('peer joined', peer => {
             const competitor = peer;
-            if (sideSize) room.sendTo(competitor, JSON.stringify({sideSize}));
-            dispatch({type: COMPETITOR_CONNECTED, competitor})
+            if (sideSize) {
+                room.sendTo(competitor, JSON.stringify({sideSize}));
+                setTimeout(() => dispatch({type: COMPETITOR_CONNECTED, competitor}), 1000);
+            } else dispatch({type: COMPETITOR_CONNECTED, competitor});
         });
 
         room.on('peer left', () => dispatch({type: COMPETITOR_LEFT,}));

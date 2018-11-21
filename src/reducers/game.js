@@ -61,12 +61,9 @@ const Actions = {
             const symbol = xIsNext ? X : O;
             squares[i] = symbol;
 
-            let winner = null;
-            if (stepNumber === squares.length - 1) {
-                winner = 'friendship';
-            } else {
-                winner = engine.moveAndCheck(i, symbol);
-            }
+            let winner = engine.moveAndCheck(i, symbol);
+            if (!winner && stepNumber === squares.length - 1) winner = 'friendship';
+
             return Assing(state, {
                 history: state.history.concat([{squares: squares}]),
                 xIsNext: !state.xIsNext,
